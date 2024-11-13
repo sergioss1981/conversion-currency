@@ -1,75 +1,32 @@
 # Currency Conversion API
-Uma API para conversão de moedas que permite calcular taxas de câmbio e realizar conversões entre diferentes moedas. Utiliza Quarkus e inclui endpoints RESTful para interação com dados de taxa de câmbio.
-
-## Sumário
-1. [Pré-requisitos](#pré-requisitos)
-2. [Instalação](#instalação)
-3. [Configuração](#configuração)
-4. [Endpoints](#endpoints)
-5. [Testes](#testes)
-6. [Contribuição](#contribuição)
-7. [Licença](#licença)
+Este projeto é uma aplicação Java baseada no framework Quarkus para conversão de moedas. Essa API permite obter taxas de câmbio e realizar conversões de valores de uma moeda para outra, integrando com um serviço de taxa de câmbio externa.
 
 ## Pré-requisitos
 - **Java 11** ou superior
 - **Maven** para gestão de dependências e build
 - **Quarkus CLI** para desenvolvimento com Quarkus
+- **Docker** para quem deseja criar e executar a imagem Docker do projeto.
+-**ExchangeRate-API** Cadastro e API-KEY no serviço https://www.exchangerate-api.com/
 
-## Instalação
+## 1. Instalação
 1. Clone o repositório:
    ```bash
-   xxx colocar aqui os comandos. 
-   Ex:  git clone https://github.com/seu-usuario/seu-projeto.git
-        cd seu-projeto
-        ./mvnw compile quarkus:dev
+   git clone https://github.com/sergioss1981/conversion-currency.git
+   cd conversion-currency
+   ./mvnw compile quarkus:dev
 
+## 2. Documentação e testes
+Swagger e Teste da aplicação: http://localhost:8080/index/
 
-
-### 5. Configuração
-Inclua detalhes de configurações específicas, como arquivos `application.properties` e variáveis de ambiente:
-
-## Configuração 
-No arquivo `application.properties`, configure as propriedades da aplicação:
-quarkus.datasource.jdbc.url=jdbc:h2:mem:test
-quarkus.datasource.username=sa
-quarkus.datasource.password=password
-
-
-### 6. Endpoints
+## 3. Endpoints
+A API tem os endpoints para converter a taxa e outro para listagem das conversoes feitas.
 
 ### `GET /convert/rate`
 Realiza a conversão de moeda usando uma taxa específica.
 
-- **Parâmetros**
-  - `from` (String): Moeda de origem (exemplo: "USD")
-  - `to` (String): Moeda de destino (exemplo: "EUR")
-  - `amount` (Double): Quantidade a ser convertida
+### `GET /convert/rates`
+Retorna uma lista de taxas de conversão para um par de moedas especificado.
 
-- **Resposta**
-  - Status: `200 OK`
-  - Exemplo de corpo de resposta:
-    ```json
-    {
-      "fromCurrency": "USD",
-      "toCurrency": "EUR",
-      "rate": 0.85,
-      "convertedAmount": 85.0
-    }
-    ```
-
-## Testes
-Para executar os testes, use o comando:
-```bash
-./mvnw test
-
-```
-
-### 8. Contribuição
-Instruções para quem deseja contribuir com o projeto.
-```markdown
-## Contribuição
-1. Faça um fork do projeto
-2. Crie uma nova branch (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova funcionalidade'`)
-4. Envie o push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Crie um novo Pull Request
+## 4. Variáveis de Ambiente
+Deverá ser definida uma API-KEY em https://www.exchangerate-api.com/ para consumo de API externa.
+Então a variável de ambiente API_KEY_EXCHANGE_RATE deverá receber a chave gerada.
